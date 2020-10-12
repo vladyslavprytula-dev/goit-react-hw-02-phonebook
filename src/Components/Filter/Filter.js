@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styles from "./filter.module.css";
 
 const Filter = ({ value, onChangeFilter }) => {
   return (
-    <label>
+    <label className={styles.filter__label}>
       Find contacts by name
       <br />
       <input
@@ -11,15 +12,16 @@ const Filter = ({ value, onChangeFilter }) => {
         value={value}
         onChange={(e) => onChangeFilter(e.target.value)}
         placeholder="Type name... "
+        className={styles.filter__input}
       />
     </label>
   );
 };
 Filter.defaultProps = {
-  onLeaveFeedback: () => {},
+  onChangeFilter: () => {},
 };
 Filter.propTypes = {
   value: PropTypes.string,
-  onLeaveFeedback: PropTypes.func,
+  onChangeFilter: PropTypes.func,
 };
 export default Filter;

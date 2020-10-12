@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import styles from "./ContactsEditor.module.css";
 class ContactsEditor extends Component {
   state = {
     name: "",
@@ -19,19 +19,23 @@ class ContactsEditor extends Component {
   };
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        Name
+      <form onSubmit={this.handleSubmit} className={styles.form__label}>
+        <p className={styles.form__text}>Name</p>
         <input
           value={this.state.name}
           onChange={this.handleChange("name")}
+          className={styles.form__input}
         ></input>
-        Phone
+        <p className={styles.form__text}>Phone</p>
         <input
           value={this.state.phone}
           pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}"
           onChange={this.handleChange("phone")}
+          className={styles.form__input}
         ></input>
-        <button type="submit">Add contact</button>
+        <button type="submit" className={styles.form__btn}>
+          Add contact
+        </button>
       </form>
     );
   }

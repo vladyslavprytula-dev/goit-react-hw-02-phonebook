@@ -3,6 +3,8 @@ import ContactsEditor from "./Components/Contacts/ContactsEditor";
 import ContactsList from "./Components/ContactsList/ContactList";
 import Filter from "./Components/Filter/Filter";
 import { v4 as uuidv4 } from "uuid";
+import Section from "./Components/Section/Section";
+import styles from "./styles/main.module.css";
 class App extends Component {
   state = {
     contacts: [],
@@ -42,22 +44,23 @@ class App extends Component {
   render() {
     const visibleTasks = this.getVisibleTask();
     return (
-      <>
-        <ContactsEditor onAddContacts={this.addPhone} />
-        {visibleTasks.length > 1 && (
-          <Filter
-            value={this.state.filter}
-            onChangeFilter={this.changeFilter}
-          />
-        )}
-        <br />
-        {visibleTasks.length > 0 && (
+      <div className={styles.container}>
+        <Section title="Enter contact">
+          <ContactsEditor onAddContacts={this.addPhone} />
+          {this.state.contacts.length > 1 && (
+            <Filter
+              value={this.state.filter}
+              onChangeFilter={this.changeFilter}
+            />
+          )}
+        </Section>
+        <Section title="Your contacts">
           <ContactsList
             contacts={visibleTasks}
             onDeleteContact={this.deleteContact}
           />
-        )}
-      </>
+        </Section>
+      </div>
     );
   }
 }
