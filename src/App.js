@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ContactsEditor from "./Components/Contacts/ContactsEditor";
+import ContactsEditor from "./Components/ContactsEditor/ContactsEditor";
 import ContactsList from "./Components/ContactsList/ContactList";
 import Filter from "./Components/Filter/Filter";
 import { v4 as uuidv4 } from "uuid";
@@ -10,20 +10,28 @@ class App extends Component {
     contacts: [],
     filter: "",
   };
-  addPhone = (name, phone) => {
+  addContact = (name, phone) => {
     const { contacts } = this.state;
     const Contact = {
       id: uuidv4(),
       name,
       phone,
     };
-    contacts.some((contact) => contact.name === name)
-      ? alert(`${name} is already in contacts`)
-      : this.setState((prevState) => {
-          return {
-            contacts: [...prevState.contacts, Contact],
-          };
-        });
+    // contacts.some((contact) => contact.name === name)
+    //   ? alert(`${name} is already in contacts`)
+    //   : this.setState((prevState) => {
+    //       return {
+    //         contacts: [...prevState.contacts, Contact],
+    //       };
+    //     });
+    if (contacts.some((contact) => contact.name === name)){
+      alert(`${name} is already in contacts`)}
+       else {this.setState((prevState) => {
+              return {
+                contacts: [...prevState.contacts, Contact],
+              };
+            });
+    }
   };
   deleteContact = (ContactId) => {
     this.setState((prevState) => ({
@@ -35,18 +43,18 @@ class App extends Component {
   changeFilter = (filter) => {
     this.setState({ filter });
   };
-  getVisibleTask = () => {
+  getVisibleContact = () => {
     const { contacts, filter } = this.state;
     return contacts.filter((contact) =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
   };
   render() {
-    const visibleTasks = this.getVisibleTask();
+    const visibleContacts = this.getVisibleContact();
     return (
       <div className={styles.container}>
         <Section title="Enter contact">
-          <ContactsEditor onAddContacts={this.addPhone} />
+          <ContactsEditor onAddContacts={this.addContact} />
           {this.state.contacts.length > 1 && (
             <Filter
               value={this.state.filter}
@@ -56,7 +64,7 @@ class App extends Component {
         </Section>
         <Section title="Your contacts">
           <ContactsList
-            contacts={visibleTasks}
+            contacts={visibleContacts}
             onDeleteContact={this.deleteContact}
           />
         </Section>

@@ -25,14 +25,14 @@ class ContactsEditor extends Component {
           value={this.state.name}
           onChange={this.handleChange("name")}
           className={styles.form__input}
-        ></input>
+        />
         <p className={styles.form__text}>Phone</p>
         <input
           value={this.state.phone}
           pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}"
           onChange={this.handleChange("phone")}
           className={styles.form__input}
-        ></input>
+        />
         <button type="submit" className={styles.form__btn}>
           Add contact
         </button>
